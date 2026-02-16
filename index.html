@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Water Utility Natural Hazard Risk Analyzer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Water Utility Natural Hazard Risk Analyzer</h1>
+      <p>
+        Explore and compare risk for utility assets across multiple hazard event
+        intensities.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="panel controls">
+        <h2>Scenario Controls</h2>
+
+        <label for="hazardType">Hazard Type</label>
+        <select id="hazardType">
+          <option value="flood">Flooding</option>
+          <option value="wildfire">Wildfire</option>
+          <option value="earthquake">Earthquake</option>
+          <option value="storm">Severe Storm</option>
+        </select>
+
+        <fieldset>
+          <legend>Event Intensities to Compare</legend>
+          <label><input type="checkbox" class="intensity" value="low" checked /> Low</label>
+          <label><input type="checkbox" class="intensity" value="medium" checked /> Medium</label>
+          <label><input type="checkbox" class="intensity" value="high" checked /> High</label>
+          <label><input type="checkbox" class="intensity" value="extreme" checked /> Extreme</label>
+        </fieldset>
+
+        <label for="exposureWeight">Exposure Weight (<span id="exposureValue">0.40</span>)</label>
+        <input id="exposureWeight" type="range" min="0" max="1" value="0.4" step="0.05" />
+
+        <label for="vulnerabilityWeight">Vulnerability Weight (<span id="vulnerabilityValue">0.35</span>)</label>
+        <input id="vulnerabilityWeight" type="range" min="0" max="1" value="0.35" step="0.05" />
+
+        <label for="criticalityWeight">Criticality Weight (<span id="criticalityValue">0.25</span>)</label>
+        <input id="criticalityWeight" type="range" min="0" max="1" value="0.25" step="0.05" />
+
+        <button id="runAnalysis">Run Analysis</button>
+      </section>
+
+      <section class="panel results">
+        <h2>Asset Risk Comparison</h2>
+        <p class="hint">
+          Risk score = (Exposure × E) + (Vulnerability × V) + (Criticality × C),
+          scaled by selected hazard intensity.
+        </p>
+        <div class="table-wrap">
+          <table id="resultsTable">
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Type</th>
+                <th>Criticality</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <section class="panel legend-panel">
+      <h2>Risk Band Legend</h2>
+      <div class="legend">
+        <span class="risk-pill low">Low (&lt; 30)</span>
+        <span class="risk-pill moderate">Moderate (30–59)</span>
+        <span class="risk-pill high">High (60–79)</span>
+        <span class="risk-pill severe">Severe (80+)</span>
+      </div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
